@@ -4,15 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="presenter"
-            type="com.example.administrator.calculator.Presenter" />
-        <variable
-            name="btn"
-            type="android.widget.Button" />
-    </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -28,9 +19,7 @@
             android:text="+/-"
             android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@+id/equalsBtn"
-            app:layout_constraintEnd_toStartOf="@+id/numBtn0"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/clearBtn"
             app:layout_constraintTop_toBottomOf="@+id/numBtn7" />
 
         <Button
@@ -42,7 +31,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/numBtnSign"
             app:layout_constraintEnd_toStartOf="@+id/numBtnDec"
             app:layout_constraintStart_toEndOf="@+id/numBtnSign"
-            app:layout_constraintTop_toTopOf="@+id/numBtnSign" />
+            app:layout_constraintTop_toTopOf="@+id/numBtnSign"
+            app:layout_constraintVertical_bias="1.0" />
 
         <Button
             android:id="@+id/numBtnPlus"
@@ -53,8 +43,10 @@
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/numBtn3"
             app:layout_constraintEnd_toEndOf="@+id/numBtnMinus"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/numBtnMinus"
-            app:layout_constraintTop_toTopOf="@+id/numBtn3" />
+            app:layout_constraintTop_toTopOf="@+id/numBtn3"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/numBtnMult"
@@ -65,8 +57,10 @@
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/numBtn9"
             app:layout_constraintEnd_toEndOf="@+id/numBtnDiv"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/numBtnDiv"
-            app:layout_constraintTop_toTopOf="@+id/numBtn9" />
+            app:layout_constraintTop_toTopOf="@+id/numBtn9"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/numBtnDiv"
@@ -76,9 +70,9 @@
             android:text="/"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/numBtnDec"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/numBtnDec"
-            app:layout_constraintTop_toTopOf="@+id/numBtnDec" />
+            app:layout_constraintEnd_toEndOf="@+id/equalsBtn"
+            app:layout_constraintTop_toTopOf="@+id/numBtnDec"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/numBtnMinus"
@@ -89,8 +83,10 @@
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/numBtn6"
             app:layout_constraintEnd_toEndOf="@+id/numBtnMult"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/numBtnMult"
-            app:layout_constraintTop_toTopOf="@+id/numBtn6" />
+            app:layout_constraintTop_toTopOf="@+id/numBtn6"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/numBtnDec"
@@ -101,7 +97,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/numBtn0"
             app:layout_constraintEnd_toStartOf="@+id/numBtnDiv"
             app:layout_constraintStart_toEndOf="@+id/numBtn0"
-            app:layout_constraintTop_toTopOf="@+id/numBtn0" />
+            app:layout_constraintTop_toTopOf="@+id/numBtn0"
+            app:layout_constraintVertical_bias="1.0" />
 
         <Button
             android:id="@+id/numBtn9"
@@ -111,8 +108,10 @@
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/numBtn8"
             app:layout_constraintEnd_toEndOf="@+id/numBtnDec"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/numBtnDec"
-            app:layout_constraintTop_toTopOf="@+id/numBtn8" />
+            app:layout_constraintTop_toTopOf="@+id/numBtn8"
+            app:layout_constraintVertical_bias="1.0" />
 
         <Button
             android:id="@+id/numBtn8"
@@ -122,8 +121,10 @@
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/numBtn7"
             app:layout_constraintEnd_toEndOf="@+id/numBtn0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/numBtn0"
-            app:layout_constraintTop_toTopOf="@+id/numBtn7" />
+            app:layout_constraintTop_toTopOf="@+id/numBtn7"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/numBtn7"
@@ -134,6 +135,7 @@
             android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@+id/numBtnSign"
             app:layout_constraintEnd_toEndOf="@+id/numBtnSign"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/numBtnSign"
             app:layout_constraintTop_toBottomOf="@+id/numBtn4" />
 
@@ -145,8 +147,10 @@
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/numBtn5"
             app:layout_constraintEnd_toEndOf="@+id/numBtn9"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/numBtn9"
-            app:layout_constraintTop_toTopOf="@+id/numBtn5" />
+            app:layout_constraintTop_toTopOf="@+id/numBtn5"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/numBtn5"
@@ -156,8 +160,10 @@
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/numBtn4"
             app:layout_constraintEnd_toEndOf="@+id/numBtn8"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/numBtn8"
-            app:layout_constraintTop_toTopOf="@+id/numBtn4" />
+            app:layout_constraintTop_toTopOf="@+id/numBtn4"
+            app:layout_constraintVertical_bias="1.0" />
 
         <Button
             android:id="@+id/numBtn4"
@@ -168,6 +174,7 @@
             android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@+id/numBtn7"
             app:layout_constraintEnd_toEndOf="@+id/numBtn7"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/numBtn7"
             app:layout_constraintTop_toBottomOf="@+id/numBtn1" />
 
@@ -179,8 +186,10 @@
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/numBtn1"
             app:layout_constraintEnd_toEndOf="@+id/numBtn5"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/numBtn5"
-            app:layout_constraintTop_toTopOf="@+id/numBtn1" />
+            app:layout_constraintTop_toTopOf="@+id/numBtn1"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/numBtn3"
@@ -190,8 +199,10 @@
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/numBtn2"
             app:layout_constraintEnd_toEndOf="@+id/numBtn6"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/numBtn6"
-            app:layout_constraintTop_toTopOf="@+id/numBtn2" />
+            app:layout_constraintTop_toTopOf="@+id/numBtn2"
+            app:layout_constraintVertical_bias="0.0" />
 
         <EditText
             android:id="@+id/resultView"
@@ -226,15 +237,14 @@
 
         <Button
             android:id="@+id/equalsBtn"
-            android:layout_width="171dp"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="49dp"
+            android:layout_marginBottom="48dp"
+            android:layout_marginEnd="8dp"
             android:text="="
             android:textSize="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/numBtnDiv"
-            app:layout_constraintStart_toStartOf="@+id/numBtnDiv"
-            app:layout_constraintTop_toBottomOf="@+id/numBtnSign" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <android.support.constraint.Group
             android:id="@+id/group"
@@ -244,6 +254,19 @@
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/clearBtn"
+            android:layout_width="138dp"
+            android:layout_height="61dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:onClick="clear"
+            android:text="Clear"
+            app:layout_constraintBottom_toBottomOf="@+id/equalsBtn"
+            app:layout_constraintEnd_toStartOf="@+id/equalsBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/equalsBtn" />
     </android.support.constraint.ConstraintLayout>
 
 </layout>

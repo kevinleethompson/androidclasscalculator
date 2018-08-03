@@ -4,20 +4,21 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.toast
+import java.lang.Math.abs
+
 
 class MainActivity : AppCompatActivity() {
 
     var total: Double = 0.0
     var currNum: Double = 0.0
-    var decimal: Boolean = false
+    var decimalPressed: Boolean = false
     var currOp : String = "";
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        resultView.setText("$currNum")
+        updateView()
 
         numBtn0.setOnClickListener({ handleNumClick(0.0) })
         numBtn1.setOnClickListener({ handleNumClick(1.0) })
@@ -41,25 +42,22 @@ class MainActivity : AppCompatActivity() {
 
     fun changeNumVal(num: Double) {
         val num = num.toInt()
+        val currNumIsNegative = currNum < 0
         if (currNum.toInt() == 0) {
-            toast("TRUE!")
-            currNum = if (decimal) ("0.$num").toDouble() else num.toDouble()
-        } else if (currNum.toInt() > 0) {
+            currNum = if (decimalPressed || hasDecimalVals(currNum)) constructNum(currNum, num) else num.toDouble()
+        } else {
             if (currOp != "") {
                 if (total.toInt() == 0) {
                     total = currNum
-                    currNum = num.toDouble()
+                    currNum = if (decimalPressed) ("0.$num").toDouble() else num.toDouble()
                 } else {
-                    val sides = currNum.toString().split(".")
-                    currNum = if (sides[1].toInt() > 0) ("${sides[0]}.${sides[1]}$num").toDouble() else ("${sides[0]}$num.0").toDouble()
+                    currNum = constructNum(currNum, num)
                 }
             } else {
-                total = currNum
-                val sides = currNum.toString().split(".")
-                currNum = if (sides[1].toInt() > 0) ("${sides[0]}.${sides[1]}$num").toDouble() else ("${sides[0]}$num.0").toDouble()
+                currNum = constructNum(currNum, num)
             }
         }
-        decimal = false
+        decimalPressed = false
     }
 
     fun handleNumClick(num: Double) {
@@ -67,19 +65,46 @@ class MainActivity : AppCompatActivity() {
         updateView()
     }
 
+    fun splitDecimal(num: Double): Pair<Int, Int> {
+        val sides = num.toString().split(".")
+        return Pair(sides[0].toInt(), sides[1].toInt())
+    }
+
+    fun constructNum(numOne: Double, numTwo: Int): Double {
+        val (whole: Int, decimal: Int) = splitDecimal(numOne)
+        var newWhole : String = "$whole"
+        var newDecimal: String = "$decimal"
+        if (decimalPressed || hasDecimalVals(numOne)) {
+            newDecimal = if (decimal > 0) "$decimal$numTwo" else "$numTwo"
+        } else {
+            newWhole = "$whole$numTwo"
+        }
+        return ("$newWhole.$newDecimal").toDouble()
+    }
+
+    fun hasDecimalVals(num: Double): Boolean {
+        val num = abs(num)
+        return num - num.toInt() > 0
+    }
+
     fun handleDecimalClick() {
-        decimal = true
+        decimalPressed = true
     }
 
     fun handleOperatorClick(op: String) {
-        if (currOp != "") { calcTotal() }
-        currOp = op
+        if (op == "sign") {
+            currNum = -currNum
+            updateView()
+        } else {
+            if (currOp != "") {
+                calcTotal()
+            }
+            currOp = op
+        }
     }
 
     fun execOperation(operand1: Double?, operand2: Double?, operator: String) : Double {
-        if (operator == "sign") {
-            return -currNum
-        } else if (operand1 != null && operand2 != null) {
+        if (operand1 != null && operand2 != null) {
             return when (operator) {
                 "plus" -> operand1 + operand2
                 "minus" -> operand1 - operand2
@@ -92,8 +117,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun clear(v: View) {
+        total = 0.0
+        currNum = 0.0
+        decimalPressed = false
+        currOp = "";
+        updateView()
+    }
+
     fun updateView() {
-        resultView.setText("$currNum")
+        val viewNum = if (hasDecimalVals(currNum)) currNum else currNum.toInt()
+        resultView.setText("$viewNum")
     }
 
     fun calcTotal() {
